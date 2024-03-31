@@ -148,7 +148,7 @@ interface Theme {
     data: ThemeData;
 }
 
-interface Settings {
+interface Settings extends StorageObject {
     debuggerUrl: string;
     developerSettings: boolean;
     safeMode?: {
@@ -330,12 +330,16 @@ interface Emitter {
     emit: (event: EmitterEvent, data: EmitterListenerData) => void;
 }
 
+interface StorageObject {
+    [key: symbol]: any;
+}
+
 interface StorageBackend {
     get: () => unknown | Promise<unknown>;
     set: (data: unknown) => void | Promise<void>;
 }
 
-interface LoaderConfig {
+interface LoaderConfig extends StorageObject {
     customLoadUrl: {
         enabled: boolean;
         url: string;
