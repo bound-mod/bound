@@ -1,17 +1,12 @@
 {
-    "name": "vendetta",
-    "version": "1.0.0",
-    "description": "A mod for Discord's mobile apps.",
+    "name": "bound",
+    "description": "Discord mobile client aimed at providing the user no control, instability and zero customizability.",
+    "version": "3.0.0",
+    "private": true,
     "scripts": {
         "build": "node build.mjs"
     },
-    "keywords": [
-        "discord",
-        "android",
-        "ios",
-        "react native"
-    ],
-    "author": "Beef",
+    "author": "Team Vendetta",
     "license": "BSD-3-Clause",
     "devDependencies": {
         "@react-native-clipboard/clipboard": "1.10.0",

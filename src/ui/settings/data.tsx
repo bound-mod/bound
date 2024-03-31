@@ -51,7 +51,7 @@ export const getScreens = (youKeys = false): Screen[] => [
                         if (!input.startsWith(PROXY_PREFIX) && !settings.developerSettings)
                             setImmediate(() => showConfirmationAlert({
                                 title: "Unproxied Plugin",
-                                content: "The plugin you are trying to install has not been proxied/verified by Vendetta staff. Are you sure you want to continue?",
+                                content: "The plugin you are trying to install has not been proxied/verified by Bound's staff. Are you sure you want to continue?",
                                 confirmText: "Install",
                                 onConfirm: () =>
                                     installPlugin(input)
@@ -86,7 +86,7 @@ export const getScreens = (youKeys = false): Screen[] => [
     },
     {
         key: formatKey("VendettaCustomPage", youKeys),
-        title: "Vendetta Page",
+        title: "Bound Page",
         shouldRender: () => false,
         render: ({ render: PageView, noErrorBoundary, ...options }: { render: React.ComponentType; noErrorBoundary: boolean } & Record<string, object>) => {
             const navigation = NavigationNative.useNavigation();
@@ -110,8 +110,8 @@ export const getYouData = () => {
 
     return {
         getLayout: () => ({
-            title: "Vendetta",
-            label: "Vendetta",
+            title: "Bound",
+            label: "Bound",
             // We can't use our keyMap function here since `settings` is an array not an object
             settings: getRenderableScreens(true).map(s => s.key)
         }),

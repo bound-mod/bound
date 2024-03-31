@@ -30,5 +30,5 @@ export default async () => {
     unloads.push(await initPlugins());
 
     // We good :)
-    logger.log("Vendetta is ready!");
+    logger.log("Your Discord app has been successfully bound in chains!");
 }

@@ -1,7 +1,7 @@
 import { ClientInfoManager } from "@lib/native";
 
 // This logs in the native logging implementation, e.g. logcat
-console.log("Hello from Vendetta!");
+console.log("Binding your Discord app in chains...");
 
 // Make 'freeze' and 'seal' do nothing
 Object.freeze = Object;
@@ -18,9 +18,9 @@ Object.defineProperty(Function.prototype, "toString", {
 import(".").then((m) => m.default()).catch((e) => {
     console.log(e?.stack ?? e.toString());
     alert([
-        "Failed to load Vendetta!\n",
+        "Failed to bind your Discord app!\n",
         `Build Number: ${ClientInfoManager.Build}`,
-        `Vendetta: ${__vendettaVersion}`,
+        `Bound: ${__vendettaVersion}`,
         e?.stack || e.toString(),
     ].join("\n"));
 });

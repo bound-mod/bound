@@ -74,7 +74,7 @@ export function getDebugInfo() {
     return {
         vendetta: {
             version: versionHash,
-            loader: window.__vendetta_loader?.name ?? "Unknown",
+            loader: window.__vendetta_loader?.name.replaceAll("Vendetta", "Bound") /* <--- awful hack lmao */ ?? "Unknown",
         },
         discord: {
             version: ClientInfoManager.Version,

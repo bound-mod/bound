@@ -48,7 +48,7 @@ export default function Developer() {
                 {window.__vendetta_loader?.features.loaderConfig && <FormSection title="Loader config">
                     <FormSwitchRow
                         label="Load from custom url"
-                        subLabel={"Load Vendetta from a custom endpoint."}
+                        subLabel={"Load Bound from a custom endpoint."}
                         leading={<FormRow.Icon source={getAssetIDByName("copy")} />}
                         value={loaderConfig.customLoadUrl.enabled}
                         onValueChange={(v: boolean) => {
@@ -61,7 +61,7 @@ export default function Developer() {
                             value={loaderConfig.customLoadUrl.url}
                             onChange={(v: string) => loaderConfig.customLoadUrl.url = v}
                             placeholder="http://localhost:4040/vendetta.js"
-                            title="VENDETTA URL"
+                            title="BOUND URL"
                         />
                         <FormDivider />
                     </>}
@@ -100,7 +100,7 @@ export default function Developer() {
                             options: [
                                 // @ts-expect-error 
                                 // Of course, to trigger an error, we need to do something incorrectly. The below will do!
-                                { label: "Vendetta", onPress: () => navigation.push("VendettaCustomPage", { render: () => <undefined /> }) },
+                                { label: "Bound", onPress: () => navigation.push("VendettaCustomPage", { render: () => <undefined /> }) },
                                 { label: "Discord", isDestructive: true, onPress: () => navigation.push("VendettaCustomPage", { noErrorBoundary: true }) },
                             ],
                         })}

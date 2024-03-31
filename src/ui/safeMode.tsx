@@ -107,7 +107,7 @@ export default () => after("render", ErrorBoundary.prototype, function (this: an
                     >
                         {[
                             `Discord: ${debugInfo.discord.build} (${debugInfo.os.name})`,
-                            `Vendetta: ${debugInfo.vendetta.version}`
+                            `Bound: ${debugInfo.vendetta.version}`
                         ].join("\n")}
                     </Codeblock>
                     <Codeblock

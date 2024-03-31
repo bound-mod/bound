@@ -47,7 +47,7 @@ try {
             __vendettaVersion: `"${commit}"`,
         },
         footer: {
-            js: "//# sourceURL=Vendetta",
+            js: "//# sourceURL=Bound",
         },
         legalComments: "none",
     });
