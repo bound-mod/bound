@@ -7,6 +7,14 @@ console.log("Hello from Vendetta!");
 Object.freeze = Object;
 Object.seal = Object;
 
+// Prevent Discord from assigning the broken toString polyfill, so the app loads on 221.6+
+const origToString = Function.prototype.toString;
+Object.defineProperty(Function.prototype, "toString", {
+    value: origToString,
+    configurable: true,
+    writable: false,
+});
+
 import(".").then((m) => m.default()).catch((e) => {
     console.log(e?.stack ?? e.toString());
     alert([
