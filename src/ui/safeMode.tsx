@@ -1,11 +1,11 @@
-import { ButtonColors } from "@types";
-import { ReactNative as RN, stylesheet } from "@metro/common";
-import { findByName, findByProps, findByStoreName } from "@metro/filters";
+import { ReactNative as RN, TextStyleSheet, stylesheet } from "@metro/common";
+import { findByName, findByProps } from "@metro/filters";
 import { after } from "@lib/patcher";
-import { getDebugInfo, toggleSafeMode } from "@lib/debug";
+import { setSafeMode } from "@lib/debug";
 import { DeviceManager } from "@lib/native";
 import { semanticColors } from "@ui/color";
-import { Button, Codeblock, ErrorBoundary as _ErrorBoundary, SafeAreaView } from "@ui/components";
+import { cardStyle } from "@ui/shared";
+import { Tabs, Codeblock, ErrorBoundary as _ErrorBoundary, SafeAreaView } from "@ui/components";
 import settings from "@lib/settings";
 
 const ErrorBoundary = findByName("ErrorBoundary");
@@ -13,7 +13,6 @@ const ErrorBoundary = findByName("ErrorBoundary");
 // Let's just pray they have this.
 const { BadgableTabBar } = findByProps("BadgableTabBar");
 
-const { TextStyleSheet } = findByProps("TextStyleSheet");
 const styles = stylesheet.createThemedStyleSheet({
     container: {
         flex: 1,
@@ -25,23 +24,26 @@ const styles = stylesheet.createThemedStyleSheet({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        marginVertical: 8,
+        marginTop: 8,
+        marginBottom: 16,
+        ...cardStyle,
     },
     headerTitle: {
-        ...TextStyleSheet["heading-md/semibold"],
-        textAlign: "center",
-        textTransform: "uppercase",
+        ...TextStyleSheet["heading-lg/semibold"],
         color: semanticColors.HEADER_PRIMARY,
+        marginBottom: 4,
     },
     headerDescription: {
         ...TextStyleSheet["text-sm/medium"],
-        textAlign: "center",
         color: semanticColors.TEXT_MUTED,
+    },
+    body: {
+        flex: 6,
     },
     footer: {
         flexDirection: DeviceManager.isTablet ? "row" : "column",
-        justifyContent: "flex-end",
-        marginVertical: 8,
+        justifyContent: "center",
+        marginBottom: 16,
     },
 });
 
@@ -54,62 +56,43 @@ interface Tab {
 interface Button {
     text: string;
     // TODO: Proper types for the below
-    color?: string;
+    variant?: string;
     size?: string;
     onPress: () => void;
 }
 
 const tabs: Tab[] = [
-    { id: "message", title: "Message" },
     { id: "stack", title: "Stack Trace" },
-    { id: "componentStack", title: "Component", trimWhitespace: true },
+    { id: "component", title: "Component", trimWhitespace: true },
 ];
 
 export default () => after("render", ErrorBoundary.prototype, function (this: any, _, ret) {
+    if (!(settings.errorBoundaryEnabled ?? true)) return;
     if (!this.state.error) return;
 
-    const debugInfo = getDebugInfo();
-
     // Not using setState here as we don't want to cause a re-render, we want this to be set in the initial render
-    this.state.activeTab ??= "message";
+    this.state.activeTab ??= "stack";
     const tabData = tabs.find(t => t.id === this.state.activeTab);
     const errorText: string = this.state.error[this.state.activeTab];
 
     // This is in the patch and not outside of it so that we can use `this`, e.g. for setting state
     const buttons: Button[] = [
         { text: "Restart Discord", onPress: this.handleReload },
-        ...!settings.safeMode?.enabled ? [{ text: "Restart in Safe Mode", onPress: toggleSafeMode }] : [],
-        { text: "Retry Render", color: ButtonColors.RED, onPress: () => this.setState({ info: null, error: null }) },
+        ...!settings.safeMode?.enabled ? [{ text: "Restart in Recovery Mode", onPress: setSafeMode }] : [],
+        { variant: "destructive", text: "Retry Render", onPress: () => this.setState({ info: null, error: null }) },
     ]
 
     return (
         <_ErrorBoundary>
             <SafeAreaView style={styles.container}>
                 <RN.View style={styles.header}>
-                    {ret.props.Illustration && <ret.props.Illustration style={{ flex: 1, resizeMode: "contain", maxHeight: 96, paddingRight: 4 }} /> }
-                    <RN.View style={{ flex: 2, paddingLeft: 4 }}>
+                    <RN.View style={{ flex: 2, marginRight: 4 }}>
                         <RN.Text style={styles.headerTitle}>{ret.props.title}</RN.Text>
                         <RN.Text style={styles.headerDescription}>{ret.props.body}</RN.Text>
                     </RN.View>
+                    {ret.props.Illustration && <ret.props.Illustration style={{ flex: 1, resizeMode: "contain", maxHeight: 96, paddingRight: 4 }} /> }
                 </RN.View>
-                <RN.View style={{ flex: 6 }}>
-                    <RN.View style={{ paddingBottom: 8 }}>
-                        {/* Are errors caught by ErrorBoundary guaranteed to have the component stack? */}
-                        <BadgableTabBar
-                            tabs={tabs}
-                            activeTab={this.state.activeTab}
-                            onTabSelected={(tab: string) => { this.setState({ activeTab: tab }) }}
-                        />
-                    </RN.View>
-                    <Codeblock
-                        selectable
-                        style={{ flexBasis: "auto", marginBottom: 8 }}
-                    >
-                        {[
-                            `Discord: ${debugInfo.discord.build} (${debugInfo.os.name})`,
-                            `Bound: ${debugInfo.vendetta.version}`
-                        ].join("\n")}
-                    </Codeblock>
+                <RN.View style={styles.body}>
                     <Codeblock
                         selectable
                         style={{ flex: 1, textAlignVertical: "top" }}
@@ -118,19 +101,27 @@ export default () => after("render", ErrorBoundary.prototype, function (this: an
                             TODO: I tried to get this working as intended using regex and failed.
                             When trimWhitespace is true, each line should have it's whitespace removed but with it's spaces kept.
                         */}
-                        {tabData?.trimWhitespace ? errorText.split("\n").filter(i => i.length !== 0).map(i => i.trim()).join("\n") : errorText}
+                        {tabData?.trimWhitespace ? errorText?.split("\n").filter(i => i.length !== 0).map(i => i.trim()).join("\n") : errorText}
                     </Codeblock>
+                    <RN.View style={{ marginVertical: 16 }}>
+                        {/* Are errors caught by ErrorBoundary guaranteed to have the component stack? */}
+                        <BadgableTabBar
+                            tabs={tabs}
+                            activeTab={this.state.activeTab}
+                            onTabSelected={(tab: string) => { this.setState({ activeTab: tab }) }}
+                        />
+                    </RN.View>
                 </RN.View>
                 <RN.View style={styles.footer}>
                     {buttons.map(button => {
                         const buttonIndex = buttons.indexOf(button) !== 0 ? 8 : 0;
 
-                        return <Button
+                        return <Tabs.Button
+                            variant={button.variant ?? "primary"}
+                            size={button.size ?? "sm"}
                             text={button.text}
-                            color={button.color ?? ButtonColors.BRAND}
-                            size={button.size ?? "small"}
                             onPress={button.onPress}
-                            style={DeviceManager.isTablet ? { flex: `0.${buttons.length}`, marginLeft: buttonIndex } : { marginTop: buttonIndex }}
+                            style={DeviceManager.isTablet ? { marginLeft: buttonIndex } : { marginTop: buttonIndex }}
                         />
                     })}
                 </RN.View>

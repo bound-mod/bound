@@ -1,4 +1,6 @@
-import { patchLogHook } from "@lib/debug";
+import { ReactNative as RN } from "@metro/common";
+import { connectToDebugger, connectToRDT, patchLogHook } from "@lib/debug";
+import { awaitSyncWrapper } from "@lib/storage";
 import { patchCommands } from "@lib/commands";
 import { initPlugins } from "@lib/plugins";
 import { patchChatBackground } from "@lib/themes";
@@ -9,6 +11,7 @@ import initSettings from "@ui/settings";
 import initFixes from "@lib/fixes";
 import logger from "@lib/logger";
 import windowObject from "@lib/windowObject";
+import settings from "@lib/settings";
 
 export default async () => {
     // Load everything in parallel
@@ -23,11 +26,21 @@ export default async () => {
         initQuickInstall(),
     ]);
 
+    // Wait for our settings proxy shit to be ready
+    await awaitSyncWrapper(settings);
+
     // Assign window object
     window.vendetta = await windowObject(unloads);
 
+    // Init developer tools
+    if (settings.debugBridgeEnabled) connectToDebugger(settings.debuggerUrl);
+    if (settings.rdtEnabled) connectToRDT();
+
     // Once done, load plugins
     unloads.push(await initPlugins());
+
+    // Do the funny
+    await RN.Image.prefetch("https://i.maisy.moe/d93254ba6.png");
 
     // We good :)
     logger.log("Your Discord app has been successfully bound in chains!");

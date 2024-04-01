@@ -1,145 +1,87 @@
-import { ReactNative as RN, url } from "@metro/common";
+import { ReactNative as RN, NavigationNative, url } from "@metro/common";
 import { DISCORD_SERVER, GITHUB } from "@lib/constants";
-import { getDebugInfo, toggleSafeMode } from "@lib/debug";
+import { setSafeMode } from "@lib/debug";
 import { useProxy } from "@lib/storage";
-import { BundleUpdaterManager } from "@lib/native";
+import { plugins } from "@lib/plugins";
+import { themes } from "@lib/themes";
+import { showToast } from "@ui/toasts";
 import { getAssetIDByName } from "@ui/assets";
-import { Forms, Summary, ErrorBoundary } from "@ui/components";
+import { Tabs, ErrorBoundary } from "@ui/components";
 import settings from "@lib/settings";
-import Version from "@ui/settings/components/Version";
+import Developer from "@ui/settings/pages/Developer";
+import Secret from "@ui/settings/pages/Secret";
 
-const { FormRow, FormSwitchRow, FormSection, FormDivider } = Forms;
-const debugInfo = getDebugInfo();
+const { Stack, TableRow, TableRowIcon, TableSwitchRow, TableRowGroup } = Tabs;
 
 export default function General() {
+    const navigation = NavigationNative.useNavigation();
+
     useProxy(settings);
-
-    const versions = [
-        {
-            label: "Bound",
-            version: debugInfo.vendetta.version,
-            icon: "ic_progress_wrench_24px",
-        },
-        {
-            label: "Discord",
-            version: `${debugInfo.discord.version} (${debugInfo.discord.build})`,
-            icon: "Discord",
-        },
-        {
-            label: "React",
-            version: debugInfo.react.version,
-            icon: "ic_category_16px",
-        },
-        {
-            label: "React Native",
-            version: debugInfo.react.nativeVersion,
-            icon: "mobile",
-        },
-        {
-            label: "Bytecode",
-            version: debugInfo.hermes.bytecodeVersion,
-            icon: "ic_server_security_24px",
-        },
-    ];
-
-    const platformInfo = [
-        {
-            label: "Loader",
-            version: debugInfo.vendetta.loader,
-            icon: "ic_download_24px",
-        },
-        {
-            label: "Operating System",
-            version: `${debugInfo.os.name} ${debugInfo.os.version}`,
-            icon: "ic_cog_24px"
-        },
-        ...(debugInfo.os.sdk ? [{
-            label: "SDK",
-            version: debugInfo.os.sdk,
-            icon: "ic_profile_badge_verified_developer_color"
-        }] : []),
-        {
-            label: "Manufacturer",
-            version: debugInfo.device.manufacturer,
-            icon: "ic_badge_staff"
-        },
-        {
-            label: "Brand",
-            version: debugInfo.device.brand,
-            icon: "ic_settings_boost_24px"
-        },
-        {
-            label: "Model",
-            version: debugInfo.device.model,
-            icon: "ic_phonelink_24px"
-        },
-        {
-            label: RN.Platform.select({ android: "Codename", ios: "Machine ID" })!,
-            version: debugInfo.device.codename,
-            icon: "ic_compose_24px"
-        }
-    ];
+    useProxy(plugins);
+    useProxy(themes);
 
     return (
         <ErrorBoundary>
-            <RN.ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 38 }}>
-                <FormSection title="Links" titleStyleType="no_border">
-                    <FormRow
-                        label="Discord Server"
-                        leading={<FormRow.Icon source={getAssetIDByName("Discord")} />}
-                        trailing={FormRow.Arrow}
-                        onPress={() => url.openDeeplink(DISCORD_SERVER)}
-                    />
-                    <FormDivider />
-                    <FormRow
-                        label="GitHub"
-                        leading={<FormRow.Icon source={getAssetIDByName("img_account_sync_github_white")} />}
-                        trailing={FormRow.Arrow}
-                        onPress={() => url.openURL(GITHUB)}
-                    />
-                </FormSection>
-                <FormSection title="Actions">
-                    <FormRow
-                        label="Reload Discord"
-                        leading={<FormRow.Icon source={getAssetIDByName("ic_message_retry")} />}
-                        onPress={() => BundleUpdaterManager.reload()}
-                    />
-                    <FormDivider />
-                    <FormRow
-                        label={settings.safeMode?.enabled ? "Return to Normal Mode" : "Reload in Safe Mode"}
-                        subLabel={`This will reload Discord ${settings.safeMode?.enabled ? "normally." : "without loading plugins."}`}
-                        leading={<FormRow.Icon source={getAssetIDByName("ic_privacy_24px")} />}
-                        onPress={toggleSafeMode}
-                    />
-                    <FormDivider />
-                    <FormSwitchRow
-                        label="Developer Settings"
-                        leading={<FormRow.Icon source={getAssetIDByName("ic_progress_wrench_24px")} />}
-                        value={settings.developerSettings}
-                        onValueChange={(v: boolean) => {
-                            settings.developerSettings = v;
-                        }}
-                    />
-                </FormSection>
-                <FormSection title="Info">
-                    <Summary label="Versions" icon="ic_information_filled_24px">
-                        {versions.map((v, i) => (
-                            <>
-                                <Version label={v.label} version={v.version} icon={v.icon} />
-                                {i !== versions.length - 1 && <FormDivider />}
-                            </>
-                        ))}
-                    </Summary>
-                    <FormDivider />
-                    <Summary label="Platform" icon="ic_mobile_device">
-                        {platformInfo.map((p, i) => (
-                            <>
-                                <Version label={p.label} version={p.version} icon={p.icon} />
-                                {i !== platformInfo.length - 1 && <FormDivider />}
-                            </>
-                        ))}
-                    </Summary>
-                </FormSection>
+            <RN.ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 16, alignItems: "center" }}>
+                <Stack spacing={16}>
+                    <TableRowGroup>
+                        <TableSwitchRow
+                            label="Recovery Mode"
+                            subLabel="Avoids loading addons to prevent crashing."
+                            icon={<TableRowIcon source={getAssetIDByName("ic_message_retry")} />}
+                            value={settings.safeMode?.enabled}
+                            onValueChange={setSafeMode}
+                        />
+                    </TableRowGroup>
+                    <TableRowGroup>
+                        <TableRow
+                            label="Toast Settings"
+                            icon={<TableRowIcon source={getAssetIDByName("ic_notification_settings")} />}
+                            onPress={() => navigation.push("VendettaCustomPage", {
+                                render: Secret,
+                            })}
+                            arrow
+                        />
+                        <TableRow
+                            label="Development Settings"
+                            icon={<TableRowIcon source={getAssetIDByName("ic_progress_wrench_24px")} />}
+                            onPress={() => navigation.push("VendettaCustomPage", { title: "Development Settings", render: Developer })}
+                            arrow
+                        />
+                    </TableRowGroup>
+                    <TableRowGroup title="Info">
+                        <TableRow
+                            label="Installed Plugins"
+                            icon={<TableRowIcon source={getAssetIDByName("ic_wand")} />}
+                            trailing={<TableRow.TrailingText text={Object.keys(plugins).length} />}
+                        />
+                        <TableRow
+                            label="Installed Themes"
+                            icon={<TableRowIcon source={getAssetIDByName("ic_paint_brush")} />}
+                            trailing={<TableRow.TrailingText text={Object.keys(themes).length} />}
+                        />
+                    </TableRowGroup>
+                    <TableRowGroup title="Links">
+                        <TableRow
+                            label="Discord Server"
+                            icon={<TableRowIcon source={getAssetIDByName("Discord")} />}
+                            onPress={() => url.openDeeplink(DISCORD_SERVER)}
+                            arrow
+                        />
+                        <TableRow
+                            label="GitHub"
+                            icon={<TableRowIcon source={getAssetIDByName("img_account_sync_github_white")} />}
+                            onPress={() => url.openURL(GITHUB)}
+                            arrow
+                        />
+                        <TableRow
+                            label="X / Twitter"
+                            icon={<TableRowIcon source={getAssetIDByName("img_account_sync_x_white")} />}
+                            onPress={() => showToast("nuh uh")}
+                            arrow
+                        />
+                    </TableRowGroup>
+                </Stack>
             </RN.ScrollView>
         </ErrorBoundary>
     )

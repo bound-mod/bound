@@ -1,30 +1,9 @@
-import { ErrorBoundaryProps } from "@types";
-import { React, ReactNative as RN, stylesheet } from "@metro/common";
-import { Forms, Button, Codeblock } from "@ui/components";
+import { ErrorBoundaryState } from "@types";
+import { React, constants, TextStyleSheet } from "@metro/common";
+import { Tabs, Forms } from "@ui/components";
 
-interface ErrorBoundaryState {
-    hasErr: boolean;
-    errText?: string;
-}
-
-const styles = stylesheet.createThemedStyleSheet({
-    view: {
-        flex: 1,
-        flexDirection: "column",
-        margin: 10,
-    },
-    title: {
-        fontSize: 20,
-        textAlign: "center",
-        marginBottom: 5,
-    },
-});
-
-export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
-    constructor(props: ErrorBoundaryProps) {
-        super(props);
-        this.state = { hasErr: false };
-    }
+export default class ErrorBoundary extends React.PureComponent<React.PropsWithChildren, ErrorBoundaryState> {
+    state: ErrorBoundaryState = { hasErr: false };
 
     static getDerivedStateFromError = (error: Error) => ({ hasErr: true, errText: error.message });
 
@@ -32,17 +11,13 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
         if (!this.state.hasErr) return this.props.children;
 
         return (
-            <RN.ScrollView style={styles.view}>
-                <Forms.FormText style={styles.title}>Uh oh.</Forms.FormText>
-                <Codeblock selectable style={{ marginBottom: 5 }}>{this.state.errText}</Codeblock>
-                <Button
-                    color={Button.Colors.RED}
-                    size={Button.Sizes.MEDIUM}
-                    look={Button.Looks.FILLED}
-                    onPress={() => this.setState({ hasErr: false, errText: undefined })}
-                    text="Retry"
-                />
-            </RN.ScrollView>
+            <Tabs.Card style={{ margin: 16 }}>
+                <Tabs.Stack>
+                    <Forms.FormText style={TextStyleSheet["heading-lg/bold"]}>Uh oh.</Forms.FormText>
+                    <Forms.FormText style={{ ...TextStyleSheet["text-xs/normal"], fontFamily: constants.Fonts.CODE_SEMIBOLD, marginBottom: 8 }}>{this.state.errText}</Forms.FormText>
+                    <Tabs.Button variant="destructive" text="Retry Render" onPress={() => this.setState({ hasErr: false, errText: undefined })} />
+                </Tabs.Stack>
+            </Tabs.Card>
         )
     }
-}
+} 

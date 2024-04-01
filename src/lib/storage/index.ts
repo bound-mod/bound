@@ -1,4 +1,4 @@
-import { Emitter, StorageBackend } from "@types";
+import { Emitter, StorageBackend, StorageObject } from "@types";
 import createEmitter from "@lib/emitter";
 
 const emitterSymbol = Symbol.for("vendetta.storage.emitter");
@@ -57,10 +57,10 @@ export function createProxy(target: any = {}): { proxy: any; emitter: Emitter } 
     };
 }
 
-export function useProxy<T>(storage: T & { [key: symbol]: any }): T {
+export function useProxy<T>(storage: StorageObject<T>): T {
     if (storage[storageErrorSymbol]) throw storage[storageErrorSymbol];
 
-    const emitter = storage[emitterSymbol] as Emitter;
+    const emitter = storage[emitterSymbol] as any as Emitter;
 
     if (!emitter) throw new Error("InvalidArgumentExcpetion - storage[emitterSymbol] is " + typeof emitter);
 
@@ -78,7 +78,7 @@ export function useProxy<T>(storage: T & { [key: symbol]: any }): T {
         };
     }, []);
 
-    return storage;
+    return storage as T;
 }
 
 export async function createStorage<T>(backend: StorageBackend): Promise<Awaited<T>> {

@@ -21,17 +21,17 @@ export default function AddonPage<T>({ items, safeModeMessage, safeModeExtras, c
             {/* TODO: Implement better searching than just by ID */}
             <RN.FlatList
                 ListHeaderComponent={<>
-                    {settings.safeMode?.enabled && <RN.View style={{ marginBottom: 10 }}>
+                    {settings.safeMode?.enabled && <RN.View style={{ marginBottom: 12 }}>
                         <HelpMessage messageType={0}>{safeModeMessage}</HelpMessage>
                         {safeModeExtras}
                     </RN.View>}
                     <Search
-                        style={{ marginBottom: 10 }}
+                        style={{ marginBottom: 12 }}
                         onChangeText={(v: string) => setSearch(v.toLowerCase())}
                         placeholder="Search"
                     />
                 </>}
-                style={{ paddingHorizontal: 10, paddingTop: 10 }}
+                style={{ paddingHorizontal: 12, paddingTop: 12 }}
                 contentContainerStyle={{ paddingBottom: 20 }}
                 data={Object.values(items).filter(i => i.id?.toLowerCase().includes(search))}
                 renderItem={({ item, index }) => <CardComponent item={item} index={index} />}

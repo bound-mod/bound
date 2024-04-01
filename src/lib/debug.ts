@@ -2,15 +2,16 @@ import { RNConstants } from "@types";
 import { ReactNative as RN } from "@metro/common";
 import { after } from "@lib/patcher";
 import { getCurrentTheme, selectTheme } from "@lib/themes";
-import { ClientInfoManager, DeviceManager, BundleUpdaterManager } from "@lib/native";
+import { ClientInfoManager, DeviceManager } from "@lib/native";
 import { getAssetIDByName } from "@ui/assets";
 import { showToast } from "@ui/toasts";
 import settings from "@lib/settings";
 import logger from "@lib/logger";
 export let socket: WebSocket;
 
-export async function toggleSafeMode() {
-    settings.safeMode = { ...settings.safeMode, enabled: !settings.safeMode?.enabled }
+export async function setSafeMode(state: boolean) {
+    settings.safeMode = { ...settings.safeMode, enabled: state };
+
     if (window.__vendetta_loader?.features.themes) {
         if (getCurrentTheme()?.id) settings.safeMode!.currentThemeId = getCurrentTheme()!.id;
         if (settings.safeMode?.enabled) {
@@ -19,7 +20,6 @@ export async function toggleSafeMode() {
             await selectTheme(settings.safeMode?.currentThemeId);
         }
     }
-    setTimeout(BundleUpdaterManager.reload, 400);
 }
 
 export function connectToDebugger(url: string) {
@@ -46,6 +46,11 @@ export function connectToDebugger(url: string) {
         showToast("An error occurred with the debugger connection!", getAssetIDByName("Small"));
     });
 }
+
+export const connectToRDT = () => window.__vendetta_rdc?.connectToDevTools({
+    host: settings.debuggerUrl.split(":")?.[0],
+    resolveRNStyle: RN.StyleSheet.flatten,
+});
 
 export function patchLogHook() {
     const unpatch = after("nativeLoggingHook", globalThis, (args) => {

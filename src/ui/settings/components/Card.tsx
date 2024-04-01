@@ -2,9 +2,10 @@ import { ReactNative as RN, stylesheet } from "@metro/common";
 import { findByProps } from "@metro/filters";
 import { getAssetIDByName } from "@ui/assets";
 import { semanticColors } from "@ui/color";
-import { Forms } from "@ui/components";
+import { Forms, Tabs } from "@ui/components";
 
-const { FormRow, FormSwitch, FormRadio } = Forms;
+const { FormRow } = Forms;
+const { RedesignSwitch, RedesignCheckbox } = Tabs;
 const { hideActionSheet } = findByProps("openLazy", "hideActionSheet");
 const { showSimpleActionSheet } = findByProps("showSimpleActionSheet");
 
@@ -12,13 +13,13 @@ const { showSimpleActionSheet } = findByProps("showSimpleActionSheet");
 const styles = stylesheet.createThemedStyleSheet({
     card: {
         backgroundColor: semanticColors?.BACKGROUND_SECONDARY,
-        borderRadius: 5,
+        borderRadius: 16,
     },
     header: {
         padding: 0,
         backgroundColor: semanticColors?.BACKGROUND_TERTIARY,
-        borderTopLeftRadius: 5,
-        borderTopRightRadius: 5,
+        borderTopLeftRadius: 16,
+        borderTopRightRadius: 16,
     },
     actions: {
         flexDirection: "row-reverse",
@@ -64,14 +65,13 @@ export default function Card(props: CardProps) {
     let pressableState = props.toggleValue ?? false;
 
     return ( 
-        <RN.View style={[styles.card, { marginTop: props.index !== 0 ? 10 : 0 }]}>
+        <RN.View style={[styles.card, { marginTop: props.index !== 0 ? 12 : 0 }]}>
             <FormRow
                 style={styles.header}
                 label={props.headerLabel}
                 leading={props.headerIcon && <FormRow.Icon source={getAssetIDByName(props.headerIcon)} />}
                 trailing={props.toggleType && (props.toggleType === "switch" ? 
-                    (<FormSwitch
-                        style={RN.Platform.OS === "android" && { marginVertical: -15 }}
+                    (<RedesignSwitch
                         value={props.toggleValue}
                         onValueChange={props.onToggleChange}
                     />)
@@ -80,8 +80,7 @@ export default function Card(props: CardProps) {
                         pressableState = !pressableState;
                         props.onToggleChange?.(pressableState)
                     }}>
-                        {/* TODO: Look into making this respect brand color */}
-                        <FormRadio selected={props.toggleValue} />
+                        <RedesignCheckbox checked={props.toggleValue} />
                     </RN.Pressable>)
                 )}
             />

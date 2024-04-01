@@ -12,7 +12,7 @@ import InstallButton from "@ui/settings/components/InstallButton";
 import General from "@ui/settings/pages/General";
 import Plugins from "@ui/settings/pages/Plugins";
 import Themes from "@ui/settings/pages/Themes";
-import Developer from "@ui/settings/pages/Developer";
+import Secret from "@ui/settings/pages/Secret";
 import { PROXY_PREFIX } from "@/lib/constants";
 
 interface Screen {
@@ -35,7 +35,7 @@ const keyMap = (screens: Screen[], data: string | ((s: Screen) => any) | null) =
 export const getScreens = (youKeys = false): Screen[] => [
     {
         key: formatKey("VendettaSettings", youKeys),
-        title: "General",
+        title: "Settings",
         icon: "settings",
         render: General,
     },
@@ -68,8 +68,8 @@ export const getScreens = (youKeys = false): Screen[] => [
     },
     {
         key: formatKey("VendettaThemes", youKeys),
-        title: "Themes",
-        icon: "ic_theme_24px",
+        title: "Design",
+        icon: "PencilSparkleIcon",
         // TODO: bad
         shouldRender: () => window.__vendetta_loader?.features.hasOwnProperty("themes") ?? false,
         options: {
@@ -78,11 +78,10 @@ export const getScreens = (youKeys = false): Screen[] => [
         render: Themes,
     },
     {
-        key: formatKey("VendettaDeveloper", youKeys),
-        title: "Developer",
-        icon: "ic_progress_wrench_24px",
-        shouldRender: () => settings.developerSettings ?? false,
-        render: Developer,
+        key: formatKey("BoundUpdater", youKeys),
+        title: "Updater",
+        icon: "ic_download_24px",
+        render: Secret,
     },
     {
         key: formatKey("VendettaCustomPage", youKeys),

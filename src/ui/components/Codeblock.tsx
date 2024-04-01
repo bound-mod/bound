@@ -1,18 +1,16 @@
 import { CodeblockProps } from "@types";
 import { ReactNative as RN, stylesheet, constants } from "@metro/common";
 import { semanticColors } from "@ui/color";
+import { cardStyle } from "@ui/shared";
 
 const styles = stylesheet.createThemedStyleSheet({
     codeBlock: {
+        ...cardStyle,
+        color: semanticColors.TEXT_NORMAL,
         fontFamily: constants.Fonts.CODE_SEMIBOLD,
         fontSize: 12,
         textAlignVertical: "center",
-        backgroundColor: semanticColors.BACKGROUND_SECONDARY,
-        color: semanticColors.TEXT_NORMAL,
-        borderWidth: 1,
-        borderRadius: 4,
-        borderColor: semanticColors.BACKGROUND_TERTIARY,
-        padding: 10,
+        paddingHorizontal: 12,
     },
 });
 

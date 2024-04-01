@@ -15,7 +15,7 @@ export default function SettingsSection() {
 
     return (
         <ErrorBoundary>
-            <FormSection key="Bound" title={`Bound${settings.safeMode?.enabled ? " (Safe Mode)" : ""}`}>
+            <FormSection key="Bound" title={`Bound${settings.safeMode?.enabled ? " (Recovery Mode)" : ""}`}>
                 {screens.map((s, i) => (
                     <>
                         <FormRow

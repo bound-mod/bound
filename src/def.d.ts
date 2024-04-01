@@ -17,10 +17,6 @@ interface SummaryProps {
     children: JSX.Element | JSX.Element[];
 }
 
-interface ErrorBoundaryProps {
-    children: JSX.Element | JSX.Element[];
-}
-
 interface CodeblockProps {
     selectable?: boolean;
     style?: _RN.TextStyle;
@@ -31,6 +27,22 @@ interface SearchProps {
     onChangeText?: (v: string) => void;
     placeholder?: string;
     style?: _RN.TextStyle;
+}
+
+interface ErrorBoundaryState {
+    hasErr: boolean;
+    errText?: string;
+}
+
+interface TabulatedScreenTab {
+    id: string;
+    title: string;
+    render?: React.ComponentType;
+    onPress?: (tab?: string) => void;
+}
+
+interface TabulatedScreenProps {
+    tabs: TabulatedScreenTab[];
 }
 
 // Helper types for API functions
@@ -151,6 +163,10 @@ interface Theme {
 interface Settings extends StorageObject {
     debuggerUrl: string;
     developerSettings: boolean;
+    debugBridgeEnabled: boolean;
+    rdtEnabled: boolean;
+    errorBoundaryEnabled: boolean;
+    inspectionDepth: number;
     safeMode?: {
         enabled: boolean;
         currentThemeId?: string;
@@ -330,8 +346,8 @@ interface Emitter {
     emit: (event: EmitterEvent, data: EmitterListenerData) => void;
 }
 
-interface StorageObject {
-    [key: symbol]: any;
+interface StorageObject<T = Record<string, any>> {
+    [key: symbol]: keyof T | Emitter;
 }
 
 interface StorageBackend {
@@ -444,9 +460,10 @@ interface VendettaObject {
             SafeAreaView: typeof _RN.SafeAreaView;
             // Vendetta
             Summary: _React.ComponentType<SummaryProps>;
-            ErrorBoundary: _React.ComponentType<ErrorBoundaryProps>;
+            ErrorBoundary: _React.ComponentType<React.PropsWithChildren>;
             Codeblock: _React.ComponentType<CodeblockProps>;
             Search: _React.ComponentType<SearchProps>;
+            TabulatedScreen: _React.ComponentType<TabulatedScreenProps>
         }
         toasts: {
             showToast: (content: string, asset?: number) => void;
@@ -490,7 +507,7 @@ interface VendettaObject {
     };
     storage: {
         createProxy: <T>(target: T) => { proxy: T, emitter: Emitter };
-        useProxy: <T>(storage: T) => T;
+        useProxy: <T>(storage: StorageObject<T>) => T;
         createStorage: <T>(backend: StorageBackend) => Promise<Awaited<T>>;
         wrapSync: <T extends Promise<any>>(store: T) => Awaited<T>;
         awaitSyncWrapper: (store: any) => Promise<void>;
