@@ -1,7 +1,4 @@
-# Bound
-Discord mobile client aimed at providing the user no control, instability and zero customizability.
+# Vendetta Continued
+This is a continuation of (Vendetta)[https://www.github.com/vendetta-mod/vendetta]. This was forked from (Bound)[https://www.github.com/bound-mod/bound], mainly because Bound is the most updated version and works with my version of discord.
 
-<details>
-    <summary>...</summary>
-    <img src="https://github.com/bound-mod/assets/blob/master/images/fools.png?raw=true" />
-</details>
+This has not been tested for newer versions than 220.18.
