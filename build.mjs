@@ -16,12 +16,12 @@ try {
         entryPoints: ["./src/entry.ts"],
         outfile: "./vcjsmod/vendettacontinued.js",
         minify: false,
-        bundle: false,
+        bundle: true,
         format: "iife",
         target: "esnext",
         plugins: [
             {
-                name: "swc",
+                name: "swce",
                 setup: (build) => {
                     build.onLoad({ filter: /\.[jt]sx?/ }, async (args) => {
                         // This actually works for dependencies as well!!
@@ -47,7 +47,7 @@ try {
             __vendettaVersion: `"${commit}"`,
         },
         footer: {
-            js: "//# sourceURL=Bound",
+            js: "//# sourceURL=Vendetta Continued",
         },
         legalComments: "none",
     });
