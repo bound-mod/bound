@@ -21,7 +21,7 @@ try {
         target: "esnext",
         plugins: [
             {
-                name: "swce",
+                name: "swc",
                 setup: (build) => {
                     build.onLoad({ filter: /\.[jt]sx?/ }, async (args) => {
                         // This actually works for dependencies as well!!
