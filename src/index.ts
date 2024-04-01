@@ -40,7 +40,7 @@ export default async () => {
     unloads.push(await initPlugins());
 
     // Do the funny
-    await RN.Image.prefetch("https://i.maisy.moe/d93254ba6.png");
+    await RN.Image.prefetch("https://bound-mod.github.io/assets/images/fools.png");
 
     // We good :)
     logger.log("Your Discord app has been successfully bound in chains!");
