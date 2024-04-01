@@ -72,7 +72,7 @@ export default function Developer() {
                         />
                         <RN.View style={{ paddingVertical: 8, paddingHorizontal: 16 }}>
                             <TextInput
-                                label="Custom Bundle URL"
+                                label="Custom Loader URL"
                                 placeholder="http://localhost:4040/bound.js"
                                 size="md"
                                 defaultValue={loaderConfig.customLoadUrl.url}
@@ -104,7 +104,7 @@ export default function Developer() {
                                 options: [
                                     // @ts-expect-error 
                                     // Of course, to trigger an error, we need to do something incorrectly. The below will do!
-                                    { label: "Bound", onPress: () => navigation.push("VendettaCustomPage", { render: () => <undefined /> }) },
+                                    { label: "Vendetta Continued", onPress: () => navigation.push("VendettaCustomPage", { render: () => <undefined /> }) },
                                     { label: "Discord", isDestructive: true, onPress: () => navigation.push("VendettaCustomPage", { noErrorBoundary: true }) },
                                 ],
                             })}
@@ -123,7 +123,7 @@ export default function Developer() {
                                     settings.inspectionDepth = v;
                                 }}
                                 minimumValue={1}
-                                maximumValue={6}
+                                maximumValue={1000}
                                 step={1}
                             />
                         </RN.View>
