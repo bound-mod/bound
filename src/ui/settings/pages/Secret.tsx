@@ -9,11 +9,13 @@ export default function General() {
         <ErrorBoundary>
             {/* <RN.Image style={{ width: "100%", height: "100%" }} resizeMode="stretch" source={{ uri: "https://bound-mod.github.io/assets/images/fools.png" }} /> */}
             <TableRowGroup>
-                        <TableRow
-                            label="This page is not finished!"
-                            icon={<TableRowIcon source={getAssetIDByName("ic_notification_settings")} />}
-                        />
-                    </TableRowGroup>
+                <Stack>
+                <TableRow
+                        label="This page is not finished!"
+                        icon={<TableRowIcon source={getAssetIDByName("ic_notification_settings")} />}
+                    />
+                </Stack>
+            </TableRowGroup>
         </ErrorBoundary>
     )
 }
