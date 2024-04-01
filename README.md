@@ -3,5 +3,5 @@ Discord mobile client aimed at providing the user no control, instability and ze
 
 <details>
     <summary>...</summary>
-    <img src="//bound-mod.github.io/assets/images/fools.png" />
+    <img src="https://github.com/bound-mod/assets/blob/master/images/fools.png?raw=true" />
 </details>
