@@ -123,7 +123,7 @@ export default function Developer() {
                                     settings.inspectionDepth = v;
                                 }}
                                 minimumValue={1}
-                                maximumValue={9999999}
+                                maximumValue={9999}
                                 step={1}
                             />
                         </RN.View>
