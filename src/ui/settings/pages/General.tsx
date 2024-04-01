@@ -42,6 +42,7 @@ export default function General() {
                             label="Toast Settings"
                             icon={<TableRowIcon source={getAssetIDByName("ic_notification_settings")} />}
                             onPress={() => navigation.push("VendettaCustomPage", {
+                                title: "Unfinished Page",
                                 render: Secret,
                             })}
                             arrow
@@ -79,7 +80,7 @@ export default function General() {
                             arrow
                         />
                         <TableRow
-                            label="X / Twitter"
+                            label="Twitter"
                             icon={<TableRowIcon source={getAssetIDByName("img_account_sync_x_white")} />}
                             onPress={() => showToast("nuh uh")}
                             arrow
