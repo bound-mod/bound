@@ -15,8 +15,8 @@ try {
     await build({
         entryPoints: ["./src/entry.ts"],
         outfile: "./vcjsmod/vendettacontinued.js",
-        minify: true,
-        bundle: true,
+        minify: false,
+        bundle: false,
         format: "iife",
         target: "esnext",
         plugins: [
