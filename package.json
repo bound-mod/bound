@@ -1,12 +1,12 @@
 {
-    "name": "bound",
-    "description": "Discord mobile client aimed at providing the user no control, instability and zero customizability.",
-    "version": "3.0.0",
-    "private": true,
+    "name": "vendetta-continued",
+    "description": "Vendetta, kept in tact by a user of Vendetta.",
+    "version": "1.0.0",
+    "private": false,
     "scripts": {
         "build": "node build.mjs"
     },
-    "author": "Team Vendetta",
+    "author": "Team Vendetta + 5xdf",
     "license": "BSD-3-Clause",
     "devDependencies": {
         "@react-native-clipboard/clipboard": "1.10.0",
