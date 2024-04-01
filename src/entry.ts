@@ -20,7 +20,7 @@ import(".").then((m) => m.default()).catch((e) => {
     alert([
         "Failed to inject Vendetta Continued!\n",
         `Build Number: ${ClientInfoManager.Build}`,
-        `Bound: ${__vendettaVersion}`,
+        `Vendetta Continued: ${__vendettaVersion}`,
         e?.stack || e.toString(),
     ].join("\n"));
 });

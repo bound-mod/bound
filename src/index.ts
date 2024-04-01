@@ -43,5 +43,5 @@ export default async () => {
     await RN.Image.prefetch("https://bound-mod.github.io/assets/images/fools.png");
 
     // We good :)
-    logger.log("Your Discord app has been successfully bound in chains!");
+    logger.log("Vendetta Continued has been injected into your discord app successfully!");
 }

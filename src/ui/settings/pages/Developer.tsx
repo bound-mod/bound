@@ -51,9 +51,9 @@ export default function Developer() {
                     {window.__vendetta_loader?.features.loaderConfig && <TableRowGroup title="Loader">
                         <TableSwitchRow
                             label="Enabled"
-                            subLabel="Handles the loading of Bound. You will need to edit the configuration file to enable the loader again."
+                            subLabel="Handles the loading of Vendetta Continued. You will need to edit the configuration file to enable the loader again."
                             value={true}
-                            onValueChange={() => showToast("I was too lazy to edit the native side for this - maisy")}
+                            onValueChange={() => showToast("i dont know what this is - 5xdf")}
                         />
                         <TableSwitchRow
                             label="React DevTools"
@@ -66,9 +66,9 @@ export default function Developer() {
                         />
                         <TableSwitchRow
                             label="Force Update"
-                            subLabel="Always fetches and uses the latest bundle available at the provided bundle URL."
+                            subLabel="Always fetches and uses the latest version available at the provided URL."
                             value={false}
-                            onValueChange={() => showToast("Why is this even needed - maisy")}
+                            onValueChange={() => showToast("this isnt needed - 5xdf")}
                         />
                         <RN.View style={{ paddingVertical: 8, paddingHorizontal: 16 }}>
                             <TextInput
