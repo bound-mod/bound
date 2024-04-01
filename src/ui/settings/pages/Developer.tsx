@@ -23,7 +23,7 @@ export default function Developer() {
     return (
         <ErrorBoundary>
             <RN.ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 16, alignItems: "center" }}>
-                <Stack spacing={16}>
+                <Stack spacing={50}>
                     <TableRowGroup title="Debug Bridge">
                         <TableSwitchRow
                             label="Enabled"
@@ -123,7 +123,7 @@ export default function Developer() {
                                     settings.inspectionDepth = v;
                                 }}
                                 minimumValue={1}
-                                maximumValue={1000}
+                                maximumValue={9999999}
                                 step={1}
                             />
                         </RN.View>
