@@ -13,13 +13,13 @@ const { showSimpleActionSheet } = findByProps("showSimpleActionSheet");
 const styles = stylesheet.createThemedStyleSheet({
     card: {
         backgroundColor: semanticColors?.BACKGROUND_SECONDARY,
-        borderRadius: 16,
+        borderRadius: 0,
     },
     header: {
         padding: 0,
         backgroundColor: semanticColors?.BACKGROUND_TERTIARY,
-        borderTopLeftRadius: 16,
-        borderTopRightRadius: 16,
+        borderTopLeftRadius: 0,
+        borderTopRightRadius: 0,
     },
     actions: {
         flexDirection: "row-reverse",

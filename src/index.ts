@@ -12,6 +12,8 @@ import initFixes from "@lib/fixes";
 import logger from "@lib/logger";
 import windowObject from "@lib/windowObject";
 import settings from "@lib/settings";
+import { getAssetIDByName } from "@ui/assets";
+import { showToast } from "@ui/toasts";
 
 export default async () => {
     // Load everything in parallel
@@ -44,4 +46,5 @@ export default async () => {
 
     // We good :)
     logger.log("Vendetta Continued has been injected into your discord app successfully!");
+    showToast("Vendetta Continued Loaded", getAssetIDByName("toast_copy_link"));
 }
