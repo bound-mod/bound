@@ -30,7 +30,11 @@ export default function General() {
                             subLabel="Avoids loading addons to prevent crashing."
                             icon={<TableRowIcon source={getAssetIDByName("ic_message_retry")} />}
                             value={settings.safeMode?.enabled}
-                            onValueChange={setSafeMode}
+                            onValueChange={(v: boolean) => {
+                                setSafeMode(v);
+                                // hack
+                                settings.safeMode!.enabled = v;
+                            }}
                         />
                     </TableRowGroup>
                     <TableRowGroup>

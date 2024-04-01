@@ -9,15 +9,15 @@ import settings from "@lib/settings";
 import logger from "@lib/logger";
 export let socket: WebSocket;
 
-export async function setSafeMode(state: boolean) {
+export function setSafeMode(state: boolean) {
     settings.safeMode = { ...settings.safeMode, enabled: state };
 
     if (window.__vendetta_loader?.features.themes) {
         if (getCurrentTheme()?.id) settings.safeMode!.currentThemeId = getCurrentTheme()!.id;
         if (settings.safeMode?.enabled) {
-            await selectTheme("default");
+            selectTheme("default");
         } else if (settings.safeMode?.currentThemeId) {
-            await selectTheme(settings.safeMode?.currentThemeId);
+            selectTheme(settings.safeMode?.currentThemeId);
         }
     }
 }
