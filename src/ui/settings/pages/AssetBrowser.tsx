@@ -2,12 +2,14 @@ import { ReactNative as RN } from "@metro/common";
 import { all } from "@ui/assets";
 import { Forms, Search, ErrorBoundary } from "@ui/components";
 import AssetDisplay from "@ui/settings/components/AssetDisplay";
+import { showToast } from "@ui/toasts";
+import { getAssetIDByName } from "@ui/assets";
 
 const { FormDivider } = Forms;
 
 export default function AssetBrowser() {
     const [search, setSearch] = React.useState("");
-
+    showToast(`Asset browser has been loaded successfully.`,getAssetIDByName("Check"))
     return (
         <ErrorBoundary>
             <RN.View style={{ flex: 1 }}>

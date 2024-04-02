@@ -1386,7 +1386,7 @@
           resolveRNStyle: ReactNative.StyleSheet.flatten
         });
       };
-      versionHash = "f1ef41f";
+      versionHash = "9129d1b";
     }
   });
 
@@ -2703,6 +2703,7 @@
   // src/ui/settings/pages/AssetBrowser.tsx
   function AssetBrowser() {
     const [search, setSearch] = React.useState("");
+    showToast(`Asset browser has been loaded successfully.`, getAssetIDByName("Check"));
     return /* @__PURE__ */ React.createElement(ErrorBoundary, null, /* @__PURE__ */ React.createElement(ReactNative.View, {
       style: {
         flex: 1
@@ -2739,25 +2740,43 @@
       init_assets();
       init_components();
       init_AssetDisplay();
+      init_toasts();
+      init_assets();
       ({ FormDivider } = Forms);
     }
   });
 
   // src/ui/settings/pages/Secret.tsx
   function General2() {
-    return /* @__PURE__ */ React.createElement(ErrorBoundary, null, /* @__PURE__ */ React.createElement(TableRowGroup, null, /* @__PURE__ */ React.createElement(Stack, null, /* @__PURE__ */ React.createElement(TableRow, {
-      label: "This page is not finished!",
+    return /* @__PURE__ */ React.createElement(ErrorBoundary, null, /* @__PURE__ */ React.createElement(ReactNative.ScrollView, {
+      style: {
+        flex: 1
+      },
+      contentContainerStyle: {
+        padding: 16,
+        alignItems: "center"
+      }
+    }, /* @__PURE__ */ React.createElement(TableRowGroup, null, /* @__PURE__ */ React.createElement(Stack, {
+      spacing: 16
+    }, /* @__PURE__ */ React.createElement(TableRow, {
+      label: "This page isn't done!",
       icon: /* @__PURE__ */ React.createElement(TableRowIcon, {
         source: getAssetIDByName("ic_notification_settings")
-      })
-    }))));
+      }),
+      onPress: function() {
+        return showToast(`What are you doing?`, getAssetIDByName("alert"));
+      },
+      arrow: true
+    })))));
   }
   var Stack, TableRow, TableRowIcon, TableSwitchRow, TableRowGroup;
   var init_Secret = __esm({
     "src/ui/settings/pages/Secret.tsx"() {
       "use strict";
+      init_common();
       init_components();
       init_assets();
+      init_toasts();
       ({ Stack, TableRow, TableRowIcon, TableSwitchRow, TableRowGroup } = Tabs);
     }
   });
@@ -2849,6 +2868,7 @@
       value: settings_default.errorBoundaryEnabled ?? true,
       onValueChange: function(v) {
         settings_default.errorBoundaryEnabled = v;
+        showToast(`Crash recovery module has been set to ${v}`, getAssetIDByName("MoreHorizontalIcon"));
       }
     }), /* @__PURE__ */ React.createElement(TableRow2, {
       label: "Trigger ErrorBoundary",
@@ -2910,7 +2930,7 @@
       value: settings_default.inspectionDepth ?? 1,
       onValueChange: function(v) {
         settings_default.inspectionDepth = v;
-        showToast(`Set inspection depth to ${settings_default.inspectionDepth}`, getAssetIDByName("toast_copy_link"));
+        showToast(`Set inspection depth to ${settings_default.inspectionDepth} nested object(s) deep`, getAssetIDByName("toast_copy_link"));
       },
       minimumValue: 1,
       maximumValue: 99999,
@@ -4178,7 +4198,7 @@
     alert([
       "Failed to inject Vendetta Continued!\n",
       `Build Number: ${ClientInfoManager.Build}`,
-      `Vendetta Continued: ${"f1ef41f"}`,
+      `Vendetta Continued: ${"9129d1b"}`,
       e?.stack || e.toString()
     ].join("\n"));
   });
