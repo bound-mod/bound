@@ -1,12 +1,12 @@
 {
-    "name": "vendetta-continued",
-    "description": "Vendetta, kept in tact by a user of Vendetta.",
+    "name": "feud",
+    "description": "Feud, kept in tact by a user of Vendetta.",
     "version": "1.0.0",
     "private": false,
     "scripts": {
         "build": "node build.mjs"
     },
-    "author": "Team Vendetta + 5xdf",
+    "author": "5xdf",
     "license": "BSD-3-Clause",
     "devDependencies": {
         "@react-native-clipboard/clipboard": "1.10.0",

@@ -68,9 +68,21 @@ export default function General() {
                     </TableRowGroup>
                     <TableRowGroup title="Links">
                         <TableRow
-                            label="Discord Server"
+                            label="Discord Server (Feud)"
                             icon={<TableRowIcon source={getAssetIDByName("Discord")} />}
                             onPress={() => url.openDeeplink(DISCORD_SERVER)}
+                            arrow
+                        />
+                        <TableRow
+                            label="Discord Server (Vendetta)"
+                            icon={<TableRowIcon source={getAssetIDByName("Discord")} />}
+                            onPress={() => url.openDeeplink(DISCORD_SERVER_VENDETTA)}
+                            arrow
+                        />
+                        <TableRow
+                            label="Discord Server (Revenge (Actual Vendetta Continuation))"
+                            icon={<TableRowIcon source={getAssetIDByName("Discord")} />}
+                            onPress={() => url.openDeeplink(DISCORD_SERVER_REVENGE)}
                             arrow
                         />
                         <TableRow

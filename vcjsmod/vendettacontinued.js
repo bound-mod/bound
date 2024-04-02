@@ -1386,7 +1386,7 @@
           resolveRNStyle: ReactNative.StyleSheet.flatten
         });
       };
-      versionHash = "117c409";
+      versionHash = "5b32a95";
     }
   });
 
@@ -1671,6 +1671,8 @@
   __export(constants_exports, {
     DISCORD_SERVER: () => DISCORD_SERVER,
     DISCORD_SERVER_ID: () => DISCORD_SERVER_ID,
+    DISCORD_SERVER_REVENGE: () => DISCORD_SERVER_REVENGE2,
+    DISCORD_SERVER_VENDETTA: () => DISCORD_SERVER_VENDETTA2,
     GITHUB: () => GITHUB,
     HTTP_REGEX: () => HTTP_REGEX,
     HTTP_REGEX_MULTI: () => HTTP_REGEX_MULTI,
@@ -1678,7 +1680,7 @@
     PROXY_PREFIX: () => PROXY_PREFIX,
     THEMES_CHANNEL_ID: () => THEMES_CHANNEL_ID
   });
-  var DISCORD_SERVER, DISCORD_SERVER_ID, PLUGINS_CHANNEL_ID, THEMES_CHANNEL_ID, GITHUB, PROXY_PREFIX, HTTP_REGEX, HTTP_REGEX_MULTI;
+  var DISCORD_SERVER, DISCORD_SERVER_ID, PLUGINS_CHANNEL_ID, THEMES_CHANNEL_ID, GITHUB, PROXY_PREFIX, DISCORD_SERVER_VENDETTA2, DISCORD_SERVER_REVENGE2, HTTP_REGEX, HTTP_REGEX_MULTI;
   var init_constants = __esm({
     "src/lib/constants.ts"() {
       "use strict";
@@ -1688,6 +1690,8 @@
       THEMES_CHANNEL_ID = "1091880434939482202";
       GITHUB = "https://github.com/5xdf/Vendetta-Continued";
       PROXY_PREFIX = "https://vd-plugins.github.io/proxy";
+      DISCORD_SERVER_VENDETTA2 = "https://discord.gg/n9QQ4XhhJP";
+      DISCORD_SERVER_REVENGE2 = "https://discord.gg/n9QQ4XhhJP";
       HTTP_REGEX = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/;
       HTTP_REGEX_MULTI = /https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
     }
@@ -3071,12 +3075,30 @@
     })), /* @__PURE__ */ React.createElement(TableRowGroup3, {
       title: "Links"
     }, /* @__PURE__ */ React.createElement(TableRow3, {
-      label: "Discord Server",
+      label: "Discord Server (Feud)",
       icon: /* @__PURE__ */ React.createElement(TableRowIcon3, {
         source: getAssetIDByName("Discord")
       }),
       onPress: function() {
         return url.openDeeplink(DISCORD_SERVER);
+      },
+      arrow: true
+    }), /* @__PURE__ */ React.createElement(TableRow3, {
+      label: "Discord Server (Vendetta)",
+      icon: /* @__PURE__ */ React.createElement(TableRowIcon3, {
+        source: getAssetIDByName("Discord")
+      }),
+      onPress: function() {
+        return url.openDeeplink(DISCORD_SERVER_VENDETTA);
+      },
+      arrow: true
+    }), /* @__PURE__ */ React.createElement(TableRow3, {
+      label: "Discord Server (Revenge (Actual Vendetta Continuation))",
+      icon: /* @__PURE__ */ React.createElement(TableRowIcon3, {
+        source: getAssetIDByName("Discord")
+      }),
+      onPress: function() {
+        return url.openDeeplink(DISCORD_SERVER_REVENGE);
       },
       arrow: true
     }), /* @__PURE__ */ React.createElement(TableRow3, {
@@ -4196,7 +4218,7 @@
     alert([
       "Failed to inject Vendetta Continued!\n",
       `Build Number: ${ClientInfoManager.Build}`,
-      `Vendetta Continued: ${"117c409"}`,
+      `Vendetta Continued: ${"5b32a95"}`,
       e?.stack || e.toString()
     ].join("\n"));
   });
