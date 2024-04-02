@@ -80,12 +80,6 @@ export default function General() {
                             arrow
                         />
                         <TableRow
-                            label="Discord Server (Revenge (Actual Vendetta Continuation))"
-                            icon={<TableRowIcon source={getAssetIDByName("Discord")} />}
-                            onPress={() => url.openDeeplink(DISCORD_SERVER_REVENGE)}
-                            arrow
-                        />
-                        <TableRow
                             label="GitHub"
                             icon={<TableRowIcon source={getAssetIDByName("img_account_sync_github_white")} />}
                             onPress={() => url.openURL(GITHUB)}

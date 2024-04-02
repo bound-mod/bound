@@ -72,13 +72,9 @@ export default function Developer() {
                             subLabel="Gets the code from the Beta Branch instead of the main branch."
                             value={betabranch}
                             onValueChange={(v: boolean) => { 
-                                betabranch = !v;
+                                betabranch! = v;
                                 showToast(`Beta branch var: ${betabranch} | v: ${v}`,getAssetIDByName("Check"))
-                                if (betabranch == true) {
-                                    loaderConfig.customLoadUrl.url = "https://raw.githubusercontent.com/5xdf/Strife/beta/strifemod/strife.js";
-                                } else {
-                                    loaderConfig.customLoadUrl.url = "https://raw.githubusercontent.com/5xdf/Strife/main/strifemod/strife.js";
-                                }
+                                loaderConfig.customLoadUrl.url = `https://raw.githubusercontent.com/5xdf/Strife/${v ? "beta" : "main"}/strifemod/strife.js`
                             }}
                         />
                         <RN.View style={{ paddingVertical: 8, paddingHorizontal: 16 }}>
