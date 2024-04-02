@@ -14,7 +14,7 @@ const commit = (await exec("git rev-parse HEAD")).stdout.trim().substring(0, 7) 
 try {
     await build({
         entryPoints: ["./src/entry.ts"],
-        outfile: "./vcjsmod/vendettacontinued.js",
+        outfile: "./strifemod/strife.js",
         minify: false,
         bundle: true,
         format: "iife",

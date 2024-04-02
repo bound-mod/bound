@@ -1386,7 +1386,7 @@
           resolveRNStyle: ReactNative.StyleSheet.flatten
         });
       };
-      versionHash = "5b32a95";
+      versionHash = "8c82836";
     }
   });
 
@@ -2829,9 +2829,9 @@
     }, /* @__PURE__ */ React.createElement(TableSwitchRow2, {
       label: "Enabled",
       subLabel: "Handles the loading of Vendetta Continued. You will need to edit the configuration file to enable the loader again.",
-      value: true,
-      onValueChange: function() {
-        return showToast("i dont know what this is - 5xdf");
+      value: false,
+      onValueChange: function(v) {
+        showToast("not needed lol", getAssetIDByName("Check"));
       }
     }), /* @__PURE__ */ React.createElement(TableSwitchRow2, {
       label: "React DevTools",
@@ -2843,11 +2843,15 @@
           connectToRDT();
       }
     }), /* @__PURE__ */ React.createElement(TableSwitchRow2, {
-      label: "Force Update",
-      subLabel: "Always fetches and uses the latest version available at the provided URL.",
+      label: "Beta Branch",
+      subLabel: "Gets the code from the Beta Branch instead of the main branch.",
       value: false,
-      onValueChange: function() {
-        return showToast("this isnt needed - 5xdf");
+      onValueChange: function(v) {
+        if (v == false) {
+          loaderConfig.customLoadUrl.url = "https://raw.githubusercontent.com/5xdf/Strife/beta/vcjsmod/vendettacontinued.js";
+        } else {
+          loaderConfig.customLoadUrl.url = "https://raw.githubusercontent.com/5xdf/Strife/main/vcjsmod/vendettacontinued.js";
+        }
       }
     }), /* @__PURE__ */ React.createElement(ReactNative.View, {
       style: {
@@ -4218,7 +4222,7 @@
     alert([
       "Failed to inject Vendetta Continued!\n",
       `Build Number: ${ClientInfoManager.Build}`,
-      `Vendetta Continued: ${"5b32a95"}`,
+      `Vendetta Continued: ${"8c82836"}`,
       e?.stack || e.toString()
     ].join("\n"));
   });
