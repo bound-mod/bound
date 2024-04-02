@@ -121,9 +121,10 @@ export default function Developer() {
                                 value={settings.inspectionDepth ?? 1}
                                 onValueChange={(v: number) => {
                                     settings.inspectionDepth = v;
+                                    showToast(`Set inspection depth to ${settings.inspectionDepth}`, getAssetIDByName("toast_copy_link"))
                                 }}
                                 minimumValue={1}
-                                maximumValue={9999}
+                                maximumValue={99999}
                                 step={1}
                             />
                         </RN.View>

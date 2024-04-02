@@ -1386,7 +1386,7 @@
           resolveRNStyle: ReactNative.StyleSheet.flatten
         });
       };
-      versionHash = "5b98f75";
+      versionHash = "f1ef41f";
     }
   });
 
@@ -2910,9 +2910,10 @@
       value: settings_default.inspectionDepth ?? 1,
       onValueChange: function(v) {
         settings_default.inspectionDepth = v;
+        showToast(`Set inspection depth to ${settings_default.inspectionDepth}`, getAssetIDByName("toast_copy_link"));
       },
       minimumValue: 1,
-      maximumValue: 9999,
+      maximumValue: 99999,
       step: 1
     })), /* @__PURE__ */ React.createElement(TableRow2, {
       label: "Debug Logs",
@@ -4177,7 +4178,7 @@
     alert([
       "Failed to inject Vendetta Continued!\n",
       `Build Number: ${ClientInfoManager.Build}`,
-      `Vendetta Continued: ${"5b98f75"}`,
+      `Vendetta Continued: ${"f1ef41f"}`,
       e?.stack || e.toString()
     ].join("\n"));
   });
