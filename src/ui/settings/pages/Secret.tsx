@@ -14,7 +14,6 @@ export default function General() {
                 <Stack spacing={16}>
                 <TableRow
                             label="This page isn't done!"
-                            icon={<TableRowIcon source={getAssetIDByName("ic_notification_settings")} />}
                             onPress={() => showToast(`What are you doing?`,getAssetIDByName("alert"))
                             }
                             arrow

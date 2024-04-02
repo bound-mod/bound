@@ -1386,7 +1386,7 @@
           resolveRNStyle: ReactNative.StyleSheet.flatten
         });
       };
-      versionHash = "9129d1b";
+      versionHash = "1f635c8";
     }
   });
 
@@ -2760,9 +2760,6 @@
       spacing: 16
     }, /* @__PURE__ */ React.createElement(TableRow, {
       label: "This page isn't done!",
-      icon: /* @__PURE__ */ React.createElement(TableRowIcon, {
-        source: getAssetIDByName("ic_notification_settings")
-      }),
       onPress: function() {
         return showToast(`What are you doing?`, getAssetIDByName("alert"));
       },
@@ -4198,7 +4195,7 @@
     alert([
       "Failed to inject Vendetta Continued!\n",
       `Build Number: ${ClientInfoManager.Build}`,
-      `Vendetta Continued: ${"9129d1b"}`,
+      `Vendetta Continued: ${"1f635c8"}`,
       e?.stack || e.toString()
     ].join("\n"));
   });
