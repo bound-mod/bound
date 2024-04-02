@@ -1386,7 +1386,7 @@
           resolveRNStyle: ReactNative.StyleSheet.flatten
         });
       };
-      versionHash = "252e119";
+      versionHash = "13a620f";
     }
   });
 
@@ -2844,12 +2844,16 @@
       }
     }), /* @__PURE__ */ React.createElement(TableSwitchRow2, {
       label: "Beta Branch",
-      subLabel: "Gets the code from the Beta Branch instead of the main branch.",
+      subLabel: "Gets the code from the Beta Branch instead of the main branch. Will reload discord.",
       value: betabranch,
       onValueChange: function(v) {
         betabranch = v;
         showToast(`Beta branch var: ${betabranch} | v: ${v}`, getAssetIDByName("Check"));
         loaderConfig.customLoadUrl.url = `https://raw.githubusercontent.com/5xdf/Strife/${v ? "beta" : "main"}/strifemod/strife.js`;
+        showToast(`Reloading discord...`, getAssetIDByName("MoreHorizontalIcon"));
+        setTimeout(function() {
+          BundleUpdaterManager.reload();
+        }, 1e3);
       }
     }), /* @__PURE__ */ React.createElement(ReactNative.View, {
       style: {
@@ -4212,7 +4216,7 @@
     alert([
       "Failed to inject Vendetta Continued!\n",
       `Build Number: ${ClientInfoManager.Build}`,
-      `Vendetta Continued: ${"252e119"}`,
+      `Vendetta Continued: ${"13a620f"}`,
       e?.stack || e.toString()
     ].join("\n"));
   });

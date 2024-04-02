@@ -9,6 +9,7 @@ import { Forms, Tabs, ErrorBoundary } from "@ui/components";
 import settings, { loaderConfig } from "@lib/settings";
 import AssetBrowser from "@ui/settings/pages/AssetBrowser";
 import Secret from "@ui/settings/pages/Secret";
+import { times } from "lodash";
 
 const { Stack, TableRow, TableRowIcon, TableSwitchRow, TableRowGroup, TextInput, Slider } = Tabs;
 const { hideActionSheet } = findByProps("openLazy", "hideActionSheet");
@@ -69,12 +70,16 @@ export default function Developer() {
                         />
                         <TableSwitchRow
                             label="Beta Branch"
-                            subLabel="Gets the code from the Beta Branch instead of the main branch."
+                            subLabel="Gets the code from the Beta Branch instead of the main branch. Will reload discord."
                             value={betabranch}
                             onValueChange={(v: boolean) => { 
                                 betabranch! = v;
                                 showToast(`Beta branch var: ${betabranch} | v: ${v}`,getAssetIDByName("Check"))
                                 loaderConfig.customLoadUrl.url = `https://raw.githubusercontent.com/5xdf/Strife/${v ? "beta" : "main"}/strifemod/strife.js`
+                                showToast(`Reloading discord...`,getAssetIDByName("MoreHorizontalIcon"))
+                                setTimeout(function(){
+                                    BundleUpdaterManager.reload()
+                                },1000)
                             }}
                         />
                         <RN.View style={{ paddingVertical: 8, paddingHorizontal: 16 }}>
