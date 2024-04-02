@@ -52,8 +52,10 @@ export default function Developer() {
                         <TableSwitchRow
                             label="Enabled"
                             subLabel="Handles the loading of Vendetta Continued. You will need to edit the configuration file to enable the loader again."
-                            value={true}
-                            onValueChange={() => showToast("i dont know what this is - 5xdf")}
+                            value={false}
+                            onValueChange={(v: boolean) => {
+                                showToast("not needed lol",getAssetIDByName("Check"))
+                            }}
                         />
                         <TableSwitchRow
                             label="React DevTools"
@@ -65,10 +67,16 @@ export default function Developer() {
                             }}
                         />
                         <TableSwitchRow
-                            label="Force Update"
-                            subLabel="Always fetches and uses the latest version available at the provided URL."
+                            label="Beta Branch"
+                            subLabel="Gets the code from the Beta Branch instead of the main branch."
                             value={false}
-                            onValueChange={() => showToast("this isnt needed - 5xdf")}
+                            onValueChange={(v: boolean) => { 
+                                if (v == false) {
+                                    loaderConfig.customLoadUrl.url = "https://raw.githubusercontent.com/5xdf/Strife/beta/vcjsmod/vendettacontinued.js";
+                                } else {
+                                    loaderConfig.customLoadUrl.url = "https://raw.githubusercontent.com/5xdf/Strife/main/vcjsmod/vendettacontinued.js";
+                                }
+                            }}
                         />
                         <RN.View style={{ paddingVertical: 8, paddingHorizontal: 16 }}>
                             <TextInput
