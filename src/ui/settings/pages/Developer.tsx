@@ -73,7 +73,7 @@ export default function Developer() {
                             value={betabranch}
                             onValueChange={(v: boolean) => { 
                                 betabranch = !v;
-                                showToast(`Beta branch var: ${betabranch} | v: ${v}`)
+                                showToast(`Beta branch var: ${betabranch} | v: ${v}`,getAssetIDByName("Check"))
                                 if (betabranch == true) {
                                     loaderConfig.customLoadUrl.url = "https://raw.githubusercontent.com/5xdf/Strife/beta/strifemod/strife.js";
                                 } else {
