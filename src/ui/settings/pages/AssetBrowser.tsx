@@ -9,7 +9,7 @@ const { FormDivider } = Forms;
 
 export default function AssetBrowser() {
     const [search, setSearch] = React.useState("");
-    showToast(`Asset browser has been loaded successfully.`,getAssetIDByName("Check"))
+    
     return (
         <ErrorBoundary>
             <RN.View style={{ flex: 1 }}>

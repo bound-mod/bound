@@ -45,6 +45,6 @@ export default async () => {
     await RN.Image.prefetch("https://bound-mod.github.io/assets/images/fools.png");
 
     // We good :)
-    logger.log("Vendetta Continued has been injected into your discord app successfully!");
-    showToast("Vendetta Continued (BETA) Loaded", getAssetIDByName("toast_copy_link"));
+    logger.log("Strife has been injected into your discord app successfully!");
+    showToast("Strife (BETA) Loaded", getAssetIDByName("toast_copy_link"));
 }

@@ -770,7 +770,7 @@
       "use strict";
       init_filters();
       logModule = findByProps("setLogFn").default;
-      logger = new logModule("Vendetta Continued");
+      logger = new logModule("Strife");
       logger_default = logger;
     }
   });
@@ -2828,7 +2828,7 @@
       title: "Loader"
     }, /* @__PURE__ */ React.createElement(TableSwitchRow2, {
       label: "Enabled",
-      subLabel: "Handles the loading of Vendetta Continued. You will need to edit the configuration file to enable the loader again.",
+      subLabel: "Handles the loading of Strife. You will need to edit the configuration file to enable the loader again.",
       value: false,
       onValueChange: function(v) {
         showToast("not needed lol", getAssetIDByName("Check"));
@@ -2900,7 +2900,7 @@
             // @ts-expect-error 
             // Of course, to trigger an error, we need to do something incorrectly. The below will do!
             {
-              label: "Vendetta Continued",
+              label: "Strife",
               onPress: function() {
                 return navigation2.push("VendettaCustomPage", {
                   render: function() {
@@ -3753,8 +3753,8 @@
         return {
           getLayout: function() {
             return {
-              title: "Vendetta Continued",
-              label: "Vendetta Continued",
+              title: "Strife",
+              label: "Strife",
               // We can't use our keyMap function here since `settings` is an array not an object
               settings: getRenderableScreens(true).map(function(s) {
                 return s.key;
@@ -3800,8 +3800,8 @@
     useProxy(settings_default);
     const screens = getRenderableScreens();
     return /* @__PURE__ */ React.createElement(ErrorBoundary, null, /* @__PURE__ */ React.createElement(FormSection, {
-      key: "Vendetta Continued",
-      title: `Vendetta Continued${settings_default.safeMode?.enabled ? " (Recovery Mode)" : ""}`
+      key: "Strife",
+      title: `Strife${settings_default.safeMode?.enabled ? " (Recovery Mode)" : ""}`
     }, screens.map(function(s, i) {
       return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(FormRow4, {
         label: s.title,
@@ -4173,8 +4173,8 @@
       connectToRDT();
     unloads.push(await initPlugins());
     await ReactNative.Image.prefetch("https://bound-mod.github.io/assets/images/fools.png");
-    logger_default.log("Vendetta Continued has been injected into your discord app successfully!");
-    showToast("Vendetta Continued (BETA) Loaded", getAssetIDByName("toast_copy_link"));
+    logger_default.log("Strife has been injected into your discord app successfully!");
+    showToast("Strife (BETA) Loaded", getAssetIDByName("toast_copy_link"));
   }
   var init_src = __esm({
     "src/index.ts"() {
@@ -4200,7 +4200,7 @@
 
   // src/entry.ts
   init_native();
-  console.log("Loading Vendetta Continued....");
+  console.log("Loading Strife....");
   Object.freeze = Object;
   Object.seal = Object;
   var origToString = Function.prototype.toString;
@@ -4214,9 +4214,9 @@
   }).catch(function(e) {
     console.log(e?.stack ?? e.toString());
     alert([
-      "Failed to inject Vendetta Continued!\n",
+      "Failed to inject Strife!\n",
       `Build Number: ${ClientInfoManager.Build}`,
-      `Vendetta Continued: ${"13a620f"}`,
+      `Strife: ${"13a620f"}`,
       e?.stack || e.toString()
     ].join("\n"));
   });

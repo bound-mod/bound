@@ -53,7 +53,7 @@ export default function Developer() {
                     {window.__vendetta_loader?.features.loaderConfig && <TableRowGroup title="Loader">
                         <TableSwitchRow
                             label="Enabled"
-                            subLabel="Handles the loading of Vendetta Continued. You will need to edit the configuration file to enable the loader again."
+                            subLabel="Handles the loading of Strife. You will need to edit the configuration file to enable the loader again."
                             value={false}
                             onValueChange={(v: boolean) => {
                                 showToast("not needed lol",getAssetIDByName("Check"))
@@ -87,6 +87,7 @@ export default function Developer() {
                                 label="Custom Loader URL"
                                 placeholder="http://localhost:4040/bound.js"
                                 size="md"
+                                
                                 defaultValue={loaderConfig.customLoadUrl.url}
                                 onChange={(v: string) => {
                                     loaderConfig.customLoadUrl.url = v;
@@ -101,7 +102,7 @@ export default function Developer() {
                             value={settings.errorBoundaryEnabled ?? true}
                             onValueChange={(v: boolean) => {
                                 settings.errorBoundaryEnabled = v;
-                                showToast(`Crash recovery module has been set to ${v}`,getAssetIDByName("MoreHorizontalIcon"));
+                                showToast(`Crash recovery module has been ${v ? "enabled" : "disabled"}`,getAssetIDByName("MoreHorizontalIcon"));
                             }}
                         />
                         <TableRow
@@ -117,7 +118,7 @@ export default function Developer() {
                                 options: [
                                     // @ts-expect-error 
                                     // Of course, to trigger an error, we need to do something incorrectly. The below will do!
-                                    { label: "Vendetta Continued", onPress: () => navigation.push("VendettaCustomPage", { render: () => <undefined /> }) },
+                                    { label: "Strife", onPress: () => navigation.push("VendettaCustomPage", { render: () => <undefined /> }) },
                                     { label: "Discord", isDestructive: true, onPress: () => navigation.push("VendettaCustomPage", { noErrorBoundary: true }) },
                                 ],
                             })}
