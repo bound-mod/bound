@@ -46,5 +46,5 @@ export default async () => {
 
     // We good :)
     logger.log("Vendetta Continued has been injected into your discord app successfully!");
-    showToast("Vendetta Continued Loaded", getAssetIDByName("toast_copy_link"));
+    showToast("Vendetta Continued (BETA) Loaded", getAssetIDByName("toast_copy_link"));
 }

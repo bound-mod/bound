@@ -1386,7 +1386,7 @@
           resolveRNStyle: ReactNative.StyleSheet.flatten
         });
       };
-      versionHash = "78f32b5";
+      versionHash = "a1ee474";
     }
   });
 
@@ -4183,7 +4183,7 @@
     unloads.push(await initPlugins());
     await ReactNative.Image.prefetch("https://bound-mod.github.io/assets/images/fools.png");
     logger_default.log("Vendetta Continued has been injected into your discord app successfully!");
-    showToast("Vendetta Continued Loaded", getAssetIDByName("toast_copy_link"));
+    showToast("Vendetta Continued (BETA) Loaded", getAssetIDByName("toast_copy_link"));
   }
   var init_src = __esm({
     "src/index.ts"() {
@@ -4225,7 +4225,7 @@
     alert([
       "Failed to inject Vendetta Continued!\n",
       `Build Number: ${ClientInfoManager.Build}`,
-      `Vendetta Continued: ${"78f32b5"}`,
+      `Vendetta Continued: ${"a1ee474"}`,
       e?.stack || e.toString()
     ].join("\n"));
   });
