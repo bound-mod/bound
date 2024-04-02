@@ -74,7 +74,7 @@ export default function Developer() {
                             value={betabranch}
                             onValueChange={(v: boolean) => { 
                                 betabranch! = v;
-                                showToast(`Beta branch var: ${betabranch} | v: ${v}`,getAssetIDByName("Check"))
+                                // showToast(`Beta branch var: ${betabranch} | v: ${v}`,getAssetIDByName("Check"))
                                 loaderConfig.customLoadUrl.url = `https://raw.githubusercontent.com/5xdf/Strife/${v ? "beta" : "main"}/strifemod/strife.js`
                                 showToast(`Reloading discord...`,getAssetIDByName("MoreHorizontalIcon"))
                                 setTimeout(function(){
