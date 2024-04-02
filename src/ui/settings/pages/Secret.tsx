@@ -14,6 +14,7 @@ export default function General() {
                 <Stack spacing={16}>
                 <TableRow
                             label="This page isn't done!"
+                            subLabel="This page isn't done. If it is something complicated, it most likely won't be done any time soon."
                             onPress={() => showToast(`What are you doing?`,getAssetIDByName("alert"))
                             }
                             arrow
