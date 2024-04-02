@@ -1386,7 +1386,7 @@
           resolveRNStyle: ReactNative.StyleSheet.flatten
         });
       };
-      versionHash = "cb5b499";
+      versionHash = "101739c";
     }
   });
 
@@ -2845,9 +2845,8 @@
     }), /* @__PURE__ */ React.createElement(TableSwitchRow2, {
       label: "Beta Branch",
       subLabel: "Gets the code from the Beta Branch instead of the main branch.",
-      value: false,
+      value: betabranch,
       onValueChange: function(v) {
-        v = !v;
         if (v == false) {
           loaderConfig.customLoadUrl.url = "https://raw.githubusercontent.com/5xdf/Strife/beta/strifemod/strife.js";
         } else {
@@ -2987,7 +2986,7 @@
       arrow: true
     })))));
   }
-  var Stack2, TableRow2, TableRowIcon2, TableSwitchRow2, TableRowGroup2, TextInput, Slider, hideActionSheet2, showSimpleActionSheet2;
+  var Stack2, TableRow2, TableRowIcon2, TableSwitchRow2, TableRowGroup2, TextInput, Slider, hideActionSheet2, showSimpleActionSheet2, betabranch;
   var init_Developer = __esm({
     "src/ui/settings/pages/Developer.tsx"() {
       "use strict";
@@ -3005,6 +3004,7 @@
       ({ Stack: Stack2, TableRow: TableRow2, TableRowIcon: TableRowIcon2, TableSwitchRow: TableSwitchRow2, TableRowGroup: TableRowGroup2, TextInput, Slider } = Tabs);
       ({ hideActionSheet: hideActionSheet2 } = findByProps("openLazy", "hideActionSheet"));
       ({ showSimpleActionSheet: showSimpleActionSheet2 } = findByProps("showSimpleActionSheet"));
+      betabranch = false;
     }
   });
 
@@ -4223,7 +4223,7 @@
     alert([
       "Failed to inject Vendetta Continued!\n",
       `Build Number: ${ClientInfoManager.Build}`,
-      `Vendetta Continued: ${"cb5b499"}`,
+      `Vendetta Continued: ${"101739c"}`,
       e?.stack || e.toString()
     ].join("\n"));
   });

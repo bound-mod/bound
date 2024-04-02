@@ -13,6 +13,7 @@ import Secret from "@ui/settings/pages/Secret";
 const { Stack, TableRow, TableRowIcon, TableSwitchRow, TableRowGroup, TextInput, Slider } = Tabs;
 const { hideActionSheet } = findByProps("openLazy", "hideActionSheet");
 const { showSimpleActionSheet } = findByProps("showSimpleActionSheet");
+var betabranch = false;
 
 export default function Developer() {
     const navigation = NavigationNative.useNavigation();
@@ -69,9 +70,9 @@ export default function Developer() {
                         <TableSwitchRow
                             label="Beta Branch"
                             subLabel="Gets the code from the Beta Branch instead of the main branch."
-                            value={false}
+                            value={betabranch}
                             onValueChange={(v: boolean) => { 
-                                v = !v
+                                // v = !v
                                 if (v == false) {
                                     loaderConfig.customLoadUrl.url = "https://raw.githubusercontent.com/5xdf/Strife/beta/strifemod/strife.js";
                                 } else {
