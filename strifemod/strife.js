@@ -1386,7 +1386,7 @@
           resolveRNStyle: ReactNative.StyleSheet.flatten
         });
       };
-      versionHash = "101739c";
+      versionHash = "0c1e55b";
     }
   });
 
@@ -2847,7 +2847,8 @@
       subLabel: "Gets the code from the Beta Branch instead of the main branch.",
       value: betabranch,
       onValueChange: function(v) {
-        if (v == false) {
+        betabranch = v;
+        if (betabranch == true) {
           loaderConfig.customLoadUrl.url = "https://raw.githubusercontent.com/5xdf/Strife/beta/strifemod/strife.js";
         } else {
           loaderConfig.customLoadUrl.url = "https://raw.githubusercontent.com/5xdf/Strife/main/strifemod/strife.js";
@@ -4223,7 +4224,7 @@
     alert([
       "Failed to inject Vendetta Continued!\n",
       `Build Number: ${ClientInfoManager.Build}`,
-      `Vendetta Continued: ${"101739c"}`,
+      `Vendetta Continued: ${"0c1e55b"}`,
       e?.stack || e.toString()
     ].join("\n"));
   });
