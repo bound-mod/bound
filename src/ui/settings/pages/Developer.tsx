@@ -71,10 +71,11 @@ export default function Developer() {
                             subLabel="Gets the code from the Beta Branch instead of the main branch."
                             value={false}
                             onValueChange={(v: boolean) => { 
+                                v = !v
                                 if (v == false) {
-                                    loaderConfig.customLoadUrl.url = "https://raw.githubusercontent.com/5xdf/Strife/beta/vcjsmod/vendettacontinued.js";
+                                    loaderConfig.customLoadUrl.url = "https://raw.githubusercontent.com/5xdf/Strife/beta/strifemod/strife.js";
                                 } else {
-                                    loaderConfig.customLoadUrl.url = "https://raw.githubusercontent.com/5xdf/Strife/main/vcjsmod/vendettacontinued.js";
+                                    loaderConfig.customLoadUrl.url = "https://raw.githubusercontent.com/5xdf/Strife/main/strifemod/strife.js";
                                 }
                             }}
                         />
