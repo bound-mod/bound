@@ -9,7 +9,7 @@ export default function General() {
     return (
         <ErrorBoundary>
             {/* <RN.Image style={{ width: "100%", height: "100%" }} resizeMode="stretch" source={{ uri: "https://bound-mod.github.io/assets/images/fools.png" }} /> */}
-            <RN.ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 16, alignItems: "center" }}>
+            <RN.ScrollView style={{ flex: 0.9 }} contentContainerStyle={{ padding: 16, alignItems: "center" }}>
             <TableRowGroup>
                 <Stack spacing={16}>
                 <TableRow
