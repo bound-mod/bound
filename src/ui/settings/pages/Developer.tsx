@@ -87,6 +87,7 @@ export default function Developer() {
                                 label="Custom Loader URL"
                                 placeholder="http://localhost:4040/bound.js"
                                 size="md"
+                                
                                 defaultValue={loaderConfig.customLoadUrl.url}
                                 onChange={(v: string) => {
                                     loaderConfig.customLoadUrl.url = v;
@@ -101,7 +102,7 @@ export default function Developer() {
                             value={settings.errorBoundaryEnabled ?? true}
                             onValueChange={(v: boolean) => {
                                 settings.errorBoundaryEnabled = v;
-                                showToast(`Crash recovery module has been set to ${v}`,getAssetIDByName("MoreHorizontalIcon"));
+                                showToast(`Crash recovery module has been ${v ? "enabled" : "disabled"}`,getAssetIDByName("MoreHorizontalIcon"));
                             }}
                         />
                         <TableRow
