@@ -15,7 +15,7 @@ export default function SettingsSection() {
 
     return (
         <ErrorBoundary>
-            <FormSection key="Vendetta Continued" title={`Vendetta Continued${settings.safeMode?.enabled ? " (Recovery Mode)" : ""}`}>
+            <FormSection key="Strife" title={`Strife${settings.safeMode?.enabled ? " (Recovery Mode)" : ""}`}>
                 {screens.map((s, i) => (
                     <>
                         <FormRow

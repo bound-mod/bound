@@ -1,7 +1,7 @@
 import { ClientInfoManager } from "@lib/native";
 
 // This logs in the native logging implementation, e.g. logcat
-console.log("Loading Vendetta Continued....");
+console.log("Loading Strife....");
 
 // Make 'freeze' and 'seal' do nothing
 Object.freeze = Object;
@@ -18,9 +18,9 @@ Object.defineProperty(Function.prototype, "toString", {
 import(".").then((m) => m.default()).catch((e) => {
     console.log(e?.stack ?? e.toString());
     alert([
-        "Failed to inject Vendetta Continued!\n",
+        "Failed to inject Strife!\n",
         `Build Number: ${ClientInfoManager.Build}`,
-        `Vendetta Continued: ${__vendettaVersion}`,
+        `Strife: ${__vendettaVersion}`,
         e?.stack || e.toString(),
     ].join("\n"));
 });
